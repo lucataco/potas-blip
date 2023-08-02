@@ -21,18 +21,23 @@ def init():
         vit="base",
     )
     image_captioning.eval()
+    image_captioning = image_captioning.to("cuda")
+
     visual_question_answering = blip_vqa(
         pretrained="checkpoints/model*_vqa.pth",
         image_size=480,
         vit="base"
     )
     visual_question_answering.eval()
+    visual_question_answering = visual_question_answering.to("cuda")
+
     image_text_matching = blip_itm(
         pretrained="checkpoints/model_base_retrieval_coco.pth",
         image_size=384,
         vit="base",
     )
     image_text_matching.eval()
+    image_text_matching = image_text_matching.to("cuda")
     context = {
         "image_captioning": image_captioning,
         "question_answering": visual_question_answering,
@@ -63,20 +68,18 @@ def handler(context: dict, request: Request) -> Response:
     output = ''
     if task == "image_captioning":
         # image_captioning.eval()
-        model = image_captioning.to("cuda")
+        model = image_captioning
         with torch.no_grad():
             caption = model.generate(im, sample=False, num_beams=3, max_length=20, min_length=5)
             output = "Caption: " + caption[0]
     elif task == "visual_question_answering":
-        # visual_question_answering.eval()
-        model = visual_question_answering.to("cuda")
+        model = visual_question_answering
         with torch.no_grad():
             answer = model(im, str(question), train=False, inference="generate")
             output = "Answer: " + answer[0]
     else:
         # image_text_matching
-        # text_matching.eval()
-        model = text_matching.to("cuda")
+        model = text_matching
         itm_output = model(im, caption, match_head="itm")
         itm_score = torch.nn.functional.softmax(itm_output, dim=1)[:, 1]
         itc_score = model(im, caption, match_head="itc")
