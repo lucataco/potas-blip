@@ -6,7 +6,7 @@ FROM pytorch/pytorch:1.11.0-cuda11.3-cudnn8-runtime
 WORKDIR /
 
 # Install git
-RUN apt-get update && apt-get install -y git
+RUN apt-get update && apt-get install -y git wget gcc
 
 # Install python packages
 RUN pip3 install --upgrade pip
@@ -17,6 +17,8 @@ RUN pip3 install -r requirements.txt
 # (in this case we have a python script)
 ADD download.py .
 RUN python3 download.py
+
+WORKDIR /src
 
 ADD . .
 

@@ -1,3 +1,5 @@
 potassium
-torch
-transformers
+transformers==4.15.0
+timm
+fairscale
+pycocoevalcap
