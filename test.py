@@ -11,10 +11,10 @@ my_model = client.Client(
     url="http://localhost:8000",
 )
 
-# inputs = {
-#     "image": "demo.jpg",
-#     "task": "image_captioning"
-# }
+inputs = {
+    "image": "demo.jpg",
+    "task": "image_captioning"
+}
 
 # inputs = {
 #     "image": "demo.jpg",
@@ -28,11 +28,11 @@ my_model = client.Client(
 #     "caption": "a dog and a cat are playing in the garden"
 # }
 
-inputs = {
-    "image": "demo.jpg",
-    "task": "visual_question_answering",
-    "question": "where is the woman?"
-}
+# inputs = {
+#     "image": "demo.jpg",
+#     "task": "visual_question_answering",
+#     "question": "where is the woman?"
+# }
 
 
 # Call your model's inference endpoint on Banana.

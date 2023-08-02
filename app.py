@@ -6,10 +6,9 @@ from torchvision import transforms
 from torchvision.transforms.functional import InterpolationMode
 
 
-from BLIP import models
-from BLIP.models.blip import blip_decoder
-from BLIP.models.blip_vqa import blip_vqa
-from BLIP.models.blip_itm import blip_itm
+from models.blip import blip_decoder
+from models.blip_vqa import blip_vqa
+from models.blip_itm import blip_itm
 
 app = Potassium("my_app")
 

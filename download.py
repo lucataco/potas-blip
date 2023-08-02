@@ -3,7 +3,7 @@ import os
 
 def download_model():
     # Github repo
-    if not os.path.exists('/src/models'):
+    if not os.path.exists('/src'):
         os.system('git clone https://github.com/salesforce/BLIP /src')
     # Models
     os.makedirs('/src/checkpoints/', exist_ok=True)
